@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xtreme Sports Academy - Dedication. Discipline. Performance.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -16,9 +16,19 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            background: #f8f9fa;
+            color: #1a1a2e;
             overflow-x: hidden; 
+        }
+
+        /* --- VANTA CLOUDS BACKGROUND --- */
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         /* --- Header & Navigation --- */
@@ -26,10 +36,10 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            border-bottom: 2px solid #ff0000;
+            box-shadow: 0 2px 20px rgba(13, 110, 253, 0.1);
         }
 
         nav {
@@ -45,16 +55,16 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1.8rem;
             font-weight: 900;
-            color: #fff;
+            color: #0d6efd;
             letter-spacing: 2px;
-            z-index: 1001; 
+            z-index: 1001;
+            text-shadow: 2px 2px 4px rgba(220, 53, 69, 0.2);
         }
 
         .logo span {
-            color: #ff0000;
+            color: #dc3545;
         }
 
-        /* Mobile Menu Toggle (Hidden on Desktop) */
         #menu-toggle {
             display: none;
         }
@@ -63,7 +73,7 @@
             display: none; 
             cursor: pointer;
             font-size: 1.5rem;
-            color: #ff0000;
+            color: #dc3545;
             z-index: 1001;
         }
 
@@ -76,30 +86,51 @@
         }
 
         .nav-links a {
-            color: #e0e0e0;
+            color: #1a1a2e;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             font-size: 0.95rem;
             letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
-            color: #ff0000;
+            color: #0d6efd;
         }
 
         .cta-nav {
-            background: #ff0000;
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
             color: #fff;
             padding: 0.7rem 1.5rem;
-            border-radius: 4px;
+            border-radius: 25px;
             font-weight: 700;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
         }
 
         .cta-nav:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+            box-shadow: 0 6px 25px rgba(220, 53, 69, 0.4);
+        }
+
+        .cta-nav::after {
+            display: none;
         }
 
         /* --- Hero Section --- */
@@ -109,27 +140,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
             overflow: hidden;
             padding-top: 6rem; 
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* Grid pattern background for high energy */
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,0,0,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
         }
 
         .hero-content {
@@ -142,7 +154,10 @@
         .hero-subtitle {
             font-size: 1.1rem;
             letter-spacing: 4px;
-            color: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 700;
             margin-bottom: 1rem;
             opacity: 0;
@@ -157,11 +172,16 @@
             margin-bottom: 1rem;
             opacity: 0;
             animation: fadeInUp 0.8s forwards 0.6s;
+            color: #1a1a2e;
+            text-shadow: 2px 2px 4px rgba(13, 110, 253, 0.2);
         }
 
         .typing-text {
-            color: #ff0000;
-            border-right: 3px solid #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-right: 3px solid #0d6efd;
             padding-right: 5px;
             animation: typing 2s steps(13) 1.5s forwards, blink 0.7s step-end infinite;
             overflow: hidden;
@@ -188,37 +208,41 @@
 
         .hero-description {
             font-size: 1.3rem;
-            color: #b0b0b0;
+            color: #495057;
             margin-bottom: 2.5rem;
-            font-weight: 300;
+            font-weight: 400;
             opacity: 0;
             animation: fadeInUp 0.8s forwards 1s;
         }
 
         .hero-cta {
             display: inline-block;
-            background: #ff0000;
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
             color: #fff;
             padding: 1.2rem 3rem;
             font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 50px;
             transition: all 0.3s;
             letter-spacing: 1px;
             opacity: 0;
             animation: fadeInUp 0.8s forwards 1.3s;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
         }
 
         .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(220, 53, 69, 0.4);
         }
+
         /* --- Section Base Styles --- */
         section {
             padding: 6rem 5%;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
@@ -228,6 +252,7 @@
             margin-bottom: 3rem;
             text-align: center;
             position: relative;
+            color: #1a1a2e;
         }
 
         .section-title::after {
@@ -235,13 +260,17 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
             margin: 1rem auto 0;
+            border-radius: 2px;
         }
 
         /* --- About Section --- */
         .about {
-            background: #0f0f0f;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(13, 110, 253, 0.1);
+            padding: 4rem 3rem;
         }
         
         .about-content {
@@ -263,40 +292,44 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .about-text p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #c0c0c0;
+            color: #495057;
             margin-bottom: 1rem;
         }
         
-        /* Image Box Wrapper */
         .about-image {
-            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-            height: 400px;
-            border-radius: 8px;
-            padding: 10px;      
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(13, 110, 253, 0.3);
+            overflow: hidden;
         }
-        
-        /* Actual Image Styling */
+
         .about-image img {
             width: 100%;
-            height: 100%;
-            border-radius: 6px;      
-            object-fit: cover;        
+            max-height: 500px;
+            height: auto;
             display: block;
+            border-radius: 10px;
         }
 
-        /* --- PROGRAMS ALTERNATING LAYOUT STYLES --- */
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+        
+
+        /* --- PROGRAMS WITH VIDEO SECTION --- */
 
         .programs {
-            background: #0f0f0f; 
+            background: transparent;
         }
         
         .combat-program-item {
@@ -305,11 +338,12 @@
             gap: 4rem;
             align-items: center;
             margin-bottom: 4rem; 
-            padding: 2rem;
-            background: #1a1a1a;
-            border-radius: 8px;
-            border: 2px solid #333;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            border: 2px solid transparent;
             transition: all 0.5s;
+            box-shadow: 0 5px 25px rgba(13, 110, 253, 0.1);
         }
 
         .combat-program-item:last-child {
@@ -317,11 +351,11 @@
         }
         
         .combat-program-item:hover {
-            border-color: #ff0000;
-            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+            border-color: #0d6efd;
+            box-shadow: 0 15px 50px rgba(220, 53, 69, 0.2);
+            transform: translateY(-5px);
         }
         
-        /* Alternating (Z-Pattern) Layout */
         .combat-program-item:nth-child(even) {
             grid-template-columns: 1.5fr 1fr; 
         }
@@ -330,34 +364,31 @@
             order: -1;
         }
         
-        .program-image-box {
+        .program-video-box {
             height: 350px;
-            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-            border-radius: 6px;
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
+            border-radius: 15px;
+            padding: 8px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
         }
 
-        .program-image-box img {
+        .program-video-box video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: 6px;
-            transition: transform 0.5s;
-        }
-        
-        .combat-program-item:hover .program-image-box img {
-            transform: scale(1.05);
+            border-radius: 10px;
         }
 
         .program-info h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.2rem;
             margin-bottom: 1rem;
-            color: #fff;
+            color: #1a1a2e;
             position: relative;
         }
 
@@ -366,14 +397,15 @@
             display: block;
             width: 50px;
             height: 3px;
-            background: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
             margin-top: 0.5rem;
+            border-radius: 2px;
         }
 
         .program-info p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #c0c0c0;
+            color: #495057;
             margin-bottom: 1.5rem;
         }
         
@@ -385,17 +417,28 @@
         }
 
         .feature-tag {
-            background: rgba(255, 0, 0, 0.15);
-            color: #ff0000;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.1), rgba(220, 53, 69, 0.1));
+            color: #0d6efd;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
+            border: 1px solid rgba(13, 110, 253, 0.3);
+            transition: all 0.3s;
+        }
+
+        .feature-tag:hover {
+            background: linear-gradient(135deg, #0d6efd, #dc3545);
+            color: #fff;
+            transform: translateY(-2px);
         }
         
         /* --- Coach Section --- */
         .coach {
-            background: #0a0a0a; 
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(220, 53, 69, 0.1);
+            padding: 4rem 3rem;
         }
         
         .coach-content {
@@ -413,20 +456,28 @@
             transform: translateX(0);
         }
 
-
         .coach-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;  
-            border-radius: 6px; 
+            border-radius: 15px; 
             display: block;
+            box-shadow: 0 10px 40px rgba(13, 110, 253, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .coach-image img:hover {
+            transform: scale(1.05);
         }
 
         .coach-info h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .coach-credentials {
@@ -437,104 +488,188 @@
         }
         
         .credential {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(220, 53, 69, 0.05));
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 15px;
             text-align: center;
-            border: 2px solid #ff0000;
+            border: 2px solid rgba(13, 110, 253, 0.2);
+            transition: all 0.3s;
+        }
+
+        .credential:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+            border-color: #0d6efd;
         }
 
         .credential-value {
             font-size: 2rem;
             font-weight: 900;
-            color: #ff0000;
+            background: linear-gradient(90deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
             margin-bottom: 0.5rem;
         }
 
         .credential-label {
             font-size: 0.9rem;
-            color: #b0b0b0;
+            color: #495057;
         }
 
         .coach-quote {
             font-size: 1.4rem;
             font-style: italic;
-            color: #e0e0e0;
+            color: #1a1a2e;
             line-height: 1.6;
             padding: 1.5rem;
-            border-left: 4px solid #ff0000;
-            background: rgba(255, 0, 0, 0.05);
+            border-left: 4px solid #0d6efd;
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(220, 53, 69, 0.05));
             margin-top: 2rem;
+            border-radius: 10px;
         }
 
-        /* --- Services Section (Automated Scroll) --- */
+        /* --- Services Section --- */
         .services {
-            background: #0f0f0f;
+            background: transparent;
         }
         
-        /* MODIFIED FOR AUTOMATED HORIZONTAL SCROLL */
         .services-grid {
             display: flex;
             gap: 2rem;
             margin-top: 3rem;
             padding: 1rem 0;
-            /* CRITICAL: Hides the overflow and makes the scroll automated via JS */
             overflow-x: hidden; 
-            width: 100%; /* Ensure it spans the full width */
+            width: 100%;
         }
         
         .service-card {
-            background: #1a1a1a;
+            background: rgba(255, 255, 255, 0.92);
             padding: 2.5rem;
-            border-radius: 8px;
+            border-radius: 20px;
             text-align: center;
             transition: all 0.3s;
             border: 2px solid transparent;
-            
-            /* CRITICAL: Define fixed width for smooth calculation */
             min-width: 300px; 
             flex-shrink: 0;
-            
-            /* Optional: Add a hover effect to pause the scroll */
-            transition: all 0.3s, background 0s; /* Allow immediate background change */
+            box-shadow: 0 5px 25px rgba(13, 110, 253, 0.1);
         }
 
         .service-card:hover {
-            border-color: #ff0000;
-            transform: translateY(-5px);
-            background: #222;
+            border-color: #0d6efd;
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 15px 50px rgba(220, 53, 69, 0.2);
         }
 
         .service-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .service-card h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: #ff0000;
+            color: #1a1a2e;
         }
 
         .service-card p {
-            color: #b0b0b0;
+            color: #495057;
             line-height: 1.6;
         }
 
-        /* --- Contact Section --- */
-        .contact {
-            background: #0a0a0a;
+        /* --- CONTACT INFO SECTION --- */
+        .contact-info-section {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            box-shadow: 0 10px 40px rgba(13, 110, 253, 0.15);
         }
 
-        .contact-container {
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(220, 53, 69, 0.05));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(13, 110, 253, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .info-card:hover::before {
+            left: 100%;
+        }
+
+        .info-card:hover {
+            border-color: #0d6efd;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #0d6efd, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        /* --- CONTACT FORM SECTION (LEFT-RIGHT LAYOUT) --- */
+        .contact-form-section {
+            background: transparent;
+            margin-top: 4rem;
+        }
+
+        .form-video-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
+            align-items: start;
         }
-        
+
         .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(13, 110, 253, 0.15);
             opacity: 0;
             transform: translateX(-30px);
             transition: all 0.8s;
@@ -552,87 +687,109 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #e0e0e0;
+            color: #1a1a2e;
             font-weight: 500;
+            font-size: 1rem;
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group select {
             width: 100%;
-            padding: 1rem;
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 4px;
-            color: #e0e0e0;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border: 2px solid rgba(13, 110, 253, 0.2);
+            border-radius: 10px;
+            color: #1a1a2e;
             font-family: 'Roboto', sans-serif;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-size: 1rem;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group select:focus {
             outline: none;
-            border-color: #ff0000;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
         }
 
         .submit-btn {
-            background: #ff0000;
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
             color: #fff;
             padding: 1.2rem 3rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             letter-spacing: 1px;
+            width: 100%;
+            box-shadow: 0 5px 20px rgba(13, 110, 253, 0.3);
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(220, 53, 69, 0.4);
         }
 
-        .contact-info {
+        /* BIG VIDEO PREVIEW BOX (RIGHT SIDE) - FIXED ASPECT RATIO */
+        .big-video-preview {
+            background: linear-gradient(135deg, #0d6efd 0%, #dc3545 100%);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 15px 50px rgba(13, 110, 253, 0.3);
             opacity: 0;
             transform: translateX(30px);
             transition: all 0.8s;
+            position: sticky;
+            top: 100px;
         }
 
-        .contact-info.visible {
+        .big-video-preview.visible {
             opacity: 1;
             transform: translateX(0);
         }
 
-        .info-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: #1a1a1a;
-            border-radius: 8px;
-            border-left: 4px solid #ff0000;
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            height: 0; /* Important: Set height to 0 for padding-bottom trick to work */
         }
 
-        .info-item h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: #ff0000;
-            margin-bottom: 0.5rem;
+        .big-video-preview video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-caption {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
             font-size: 1.2rem;
-        }
-
-        .info-item p {
-            color: #b0b0b0;
+            font-weight: 600;
+            color: #1a1a2e;
         }
 
         /* --- Footer --- */
         footer {
-            background: #000;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0d6efd 100%);
             padding: 3rem 5%;
             text-align: center;
-            border-top: 2px solid #ff0000;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-content {
@@ -641,7 +798,7 @@
         }
 
         .footer-content p {
-            color: #808080;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1rem;
         }
 
@@ -653,21 +810,26 @@
         }
 
         .social-links a {
-            color: #808080;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 1.5rem;
-            transition: color 0.3s;
-            text-decoration: none; 
+            transition: all 0.3s;
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .social-links a:hover {
-            color: #ff0000;
+            color: #fff;
+            background: rgba(220, 53, 69, 0.8);
+            transform: translateY(-5px);
         }
 
-        /* ==================================== */
-        /* RESPONSIVE STYLES          */
-        /* ==================================== */
-
-        /* Tablet/Mobile Landscape (Max-width 1024px) */
+        /* RESPONSIVE STYLES */
         @media (max-width: 1024px) {
             .hero-title {
                 font-size: 3.5rem; 
@@ -687,19 +849,22 @@
                 order: 0; 
             }
             
-            .program-image-box {
+            .program-video-box {
                 order: -1;
             }
-            
-            .program-info h3::after {
-                margin: 0.5rem 0 0; 
+
+            .form-video-container {
+                grid-template-columns: 1fr;
+            }
+
+            .big-video-preview {
+                position: relative;
+                top: 0;
             }
         }
         
-        /* Mobile Portrait/Tablet (Max-width 768px) */
         @media (max-width: 768px) {
             
-            /* --- Navigation Overhaul --- */
             .menu-icon {
                 display: block; 
             }
@@ -710,28 +875,22 @@
                 right: -100%; 
                 width: 70%;
                 height: 100vh;
-                background: #1a1a1a;
+                background: rgba(255, 255, 255, 0.98);
                 flex-direction: column;
                 justify-content: center;
                 gap: 2rem;
                 padding-top: 6rem;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+                box-shadow: -5px 0 15px rgba(13, 110, 253, 0.2);
             }
 
             #menu-toggle:checked ~ .nav-links {
                 right: 0;
             }
 
-            /* --- Grid Layouts Stack --- */
             .about-content,
-            .coach-content,
-            .contact-container {
+            .coach-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-
-            .coach-image {
-                height: 300px; 
             }
 
             .about-image {
@@ -754,13 +913,11 @@
                 padding: 4rem 5%;
             }
 
-            /* On smaller screens, make service cards take up more width */
             .service-card {
                 min-width: 80%;
             }
         }
 
-        /* Very Small Mobile (Max-width 480px) */
         @media (max-width: 480px) {
             .hero-title {
                 font-size: 2.2rem;
@@ -774,17 +931,16 @@
             .hero-description {
                 font-size: 1rem;
             }
-            
-            .cta-nav {
-                padding: 0.7rem 1.5rem;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Vanta Clouds Background -->
+    <div id="vanta-bg"></div>
+
     <header>
         <nav>
-            <div class="logo">XTREME<span>SPORTS</span></div>
+            <div class="logo">Combat<span>SPORTSAcadamy</span></div>
             
             <input type="checkbox" id="menu-toggle">
             <label for="menu-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
@@ -792,7 +948,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#programs">Programs</a></li>
-                <li><a href="#coach">Coach X</a></li>
+                <li><a href="#coach">Coach</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact" class="cta-nav">Start Your Trial</a></li>
             </ul>
@@ -805,7 +961,7 @@
             <h1 class="hero-title">
                 DEDICATION. DISCIPLINE. <span class="typing-text">PERFORMANCE.</span>
             </h1>
-            <p class="hero-description">Welcome to Xtreme Sports Academy, where passion turns into performance.</p>
+            <p class="hero-description">Welcome to Combat Sports Academy, where passion turns into performance.</p>
             <a href="#programs" class="hero-cta">VIEW PROGRAMS</a>
         </div>
     </section>
@@ -815,12 +971,12 @@
         <div class="about-content scroll-reveal">
             <div class="about-text">
                 <h3>Building Unstoppable Athletes</h3>
-                <p>Founded in 2020, Xtreme Sports Academy focuses on **holistic development** through sports science, skill-based learning, strength training, and mental conditioning.</p>
+                <p>Founded in 2020, Combat Sports Academy focuses on <strong>holistic development</strong> through sports science, skill-based learning, strength training, and mental conditioning.</p>
                 <p>Our mission is clear: Build confident, skilled, and unstoppable athletes who excel both in competition and in life.</p>
                 <p>We combine cutting-edge training methodologies with time-tested combat sports fundamentals to create champions.</p>
             </div>
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1627916607062-8706d86c4768?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOmRlc2lnbmVyXzYzODgyNTo6MTE5NjAyOntzY3JvbGw6dHJ1ZX0&ixlib=rb-4.0.3&q=80&w=1080" alt="Training facility gym">
+                <img src="image.png" alt="Training facility gym">
             </div>
         </div>
     </section>
@@ -829,12 +985,15 @@
         <h2 class="section-title">Professional Combat Programs</h2>
         
         <div class="combat-program-item scroll-reveal">
-            <div class="program-image-box">
-                <img src="https://images.unsplash.com/photo-1546274483-29496f8c2b5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOmRlc2lnbmVyXzYzODgyNTo6MTE5NjAyOntzY3Jyb2xsOnRydWV9&ixlib=rb-4.0.3&q=80&w=1080" alt="Professional boxer training">
+            <div class="program-video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="product/boxing.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="program-info">
                 <h3>Boxing</h3>
-                <p>Master the **sweet science** of boxing. This program focuses on developing elite-level footwork, defensive head movement, complex combinations, and strategic ring generalship for competitive success.</p>
+                <p>Master the <strong>sweet science</strong> of boxing. This program focuses on developing elite-level footwork, defensive head movement, complex combinations, and strategic ring generalship for competitive success.</p>
                 <div class="program-features">
                     <span class="feature-tag">Advanced Sparring</span>
                     <span class="feature-tag">Defensive Drills</span>
@@ -844,12 +1003,15 @@
         </div>
         
         <div class="combat-program-item scroll-reveal">
-            <div class="program-image-box">
-                <img src="https://images.unsplash.com/photo-1596773285703-9d46927906d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOmRlc2lnbmVyXzYzODgyNTo6MTE5NjAyOntzY3Jyb2xsOnRydWV9&ixlib=rb-4.0.3&q=80&w=1080" alt="Kickboxer throwing a high kick">
+            <div class="program-video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="product/kickboxing.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="program-info">
                 <h3>Kickboxing</h3>
-                <p>Unlock the power of the **Art of Eight Limbs**. Our program integrates powerful strikes, devastating kicks, clinch work, and elbows, essential for dominance in stand-up fighting.</p>
+                <p>Unlock the power of the <strong>Art of Eight Limbs</strong>. Our program integrates powerful strikes, devastating kicks, clinch work, and elbows, essential for dominance in stand-up fighting.</p>
                 <div class="program-features">
                     <span class="feature-tag">Clinch Work</span>
                     <span class="feature-tag">Low Kick Power</span>
@@ -859,31 +1021,19 @@
         </div>
         
         <div class="combat-program-item scroll-reveal">
-            <div class="program-image-box">
-                <img src="https://images.unsplash.com/photo-1628105658639-c122ce2d7c03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOmRlc2lnbmVyXzYzODgyNTo6MTE5NjAyOntzY3Jyb2xsOnRydWV9&ixlib=rb-4.0.3&q=80&w=1080" alt="Mixed Martial Arts training with ground work">
-            </div>
-            <div class="program-info">
-                <h3>Grappling</h3>
-                <p>The ultimate discipline. Training covers seamless transitions between striking, wrestling (takedowns/defense), and Brazilian Jiu-Jitsu **ground control**. Be ready for every phase of combat.</p>
-                <div class="program-features">
-                    <span class="feature-tag">All-Range Combat</span>
-                    <span class="feature-tag">Takedown Defense</span>
-                    <span class="feature-tag">BJJ Fundamentals</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="combat-program-item scroll-reveal">
-            <div class="program-image-box">
-                <img src="https://images.unsplash.com/photo-1577961208035-71775798993f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzAwOmRlc2lnbmVyXzYzODgyNTo6MTE5NjAyOntzY3JvbGw6dHJ1ZX0&ixlib=rb-4.0.3&q=80&w=1080" alt="Wrestler executing a takedown">
+            <div class="program-video-box">
+                <video autoplay muted loop playsinline>
+                    <source src="product/wushu.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="program-info">
                 <h3>Wushu</h3>
-                <p>Gain mastery over the fundamental art of control. Focus on freestyle and folkstyle wrestling takedowns, pinning mechanics, and submission defense crucial for ground dominance.</p>
+                <p>Experience the ancient Chinese martial art. This program emphasizes fluid movements, acrobatic kicks, powerful strikes, and traditional forms that build strength, flexibility, and discipline.</p>
                 <div class="program-features">
-                    <span class="feature-tag">Takedowns & Throws</span>
-                    <span class="feature-tag">Positional Control</span>
-                    <span class="feature-tag">Endurance</span>
+                    <span class="feature-tag">Traditional Forms</span>
+                    <span class="feature-tag">Flexibility Training</span>
+                    <span class="feature-tag">Acrobatic Techniques</span>
                 </div>
             </div>
         </div>
@@ -892,9 +1042,11 @@
     <section class="coach" id="coach">
         <h2 class="section-title">Meet Our Head Coach</h2>
         <div class="coach-content scroll-reveal">
-            <div class="coach-image"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm_WKxEg2YTuAOEeHQQXTqqEcKtlMYpejSlBVeBkbvzA&s" alt="Xtreme Sports Academy"> </div>
+            <div class="coach-image"> 
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm_WKxEg2YTuAOEeHQQXTqqEcKtlMYpejSlBVeBkbvzA&s" alt="Xtreme Sports Academy"> 
+            </div>
             <div class="coach-info">
-                <h3>Coach X</h3>
+                <h3>Rajesh Dubal</h3>
                 <div class="coach-credentials">
                     <div class="credential">
                         <span class="credential-value">🏅</span>
@@ -942,44 +1094,79 @@
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <h2 class="section-title">Contact Us</h2>
-        <div class="contact-container">
+    <!-- CONTACT INFO SECTION -->
+    <section class="contact-info-section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info-grid scroll-reveal">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h4>Location</h4>
+                <p>Maharashtra<br>Andheri,Mumbai</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                <h4>Phone</h4>
+                <p>+91-8898898595</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <h4>Email</h4>
+                <p>info@CombatSportsAcademy.com</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-clock"></i></div>
+                <h4>Hours</h4>
+                <p>Wed-Sat: 5:00 PM - 6:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM & VIDEO SECTION (LEFT-RIGHT) -->
+    <section class="contact-form-section">
+        <h2 class="section-title">Start Your Journey Today</h2>
+        <div class="form-video-container">
+            <!-- LEFT SIDE: FORM -->
             <form class="contact-form scroll-reveal">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
+                    <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
                 </div>
+                
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <label for="sport"><i class="fas fa-dumbbell"></i> Select Sport</label>
+                    <select id="sport" required>
+                        <option value="">Choose your sport</option>
+                        <option value="boxing">Boxing</option>
+                        <option value="kickboxing">Kickboxing</option>
+                        <option value="wushu">Wushu</option>
+                    </select>
                 </div>
+                
                 <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" required>
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="email" placeholder="your.email@example.com" required>
                 </div>
+                
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+91-XXXXX-XXXXX" required>
                 </div>
-                <button type="submit" class="submit-btn">BOOK YOUR FREE TRIAL</button>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> BOOK Now
+                </button>
             </form>
-            <div class="contact-info scroll-reveal">
-                <div class="info-item">
-                    <h4>Location</h4>
-                    <p>XYZ Sports Ground<br>ABC Road, City</p>
+            
+            <!-- RIGHT SIDE: BIG VIDEO PREVIEW WITH FIXED ASPECT RATIO -->
+            <div class="big-video-preview scroll-reveal">
+                <div class="video-wrapper">
+                    <video id="sport-preview-video" autoplay muted loop playsinline>
+                        <source src="preset/boxing.mp4" type="video/mp4" id="video-source">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
-                <div class="info-item">
-                    <h4>Phone</h4>
-                    <p>+91-98765-43210</p>
-                </div>
-                <div class="info-item">
-                    <h4>Email</h4>
-                    <p>info@xtremesportsacademy.com</p>
-                </div>
-                <div class="info-item">
-                    <h4>Hours</h4>
-                    <p>Mon-Fri: 6:00 AM - 10:00 PM<br>Sat-Sun: 7:00 AM - 8:00 PM</p>
+                <div class="video-caption" id="video-caption">
+                    <i class="fas fa-video"></i> Boxing 
                 </div>
             </div>
         </div>
@@ -987,20 +1174,46 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Xtreme Sports Academy. All Rights Reserved.</p>
+            <p>&copy; 2024 Combat Sports Academy. All Rights Reserved.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a> 
-                <a href="#"><i class="fab fa-instagram"></i></a> 
-                <a href="#"><i class="fab fa-twitter"></i></a> 
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> 
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a> 
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> 
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- THREE.JS and VANTA.JS Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+
     <script>
-        // --- 1. General Scroll Reveal Animation ---
+        // ================================
+        // VANTA CLOUDS BACKGROUND INIT
+        // ================================
+        VANTA.CLOUDS({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            backgroundColor: 0xffffff,
+            skyColor: 0x68b8d7,
+            cloudColor: 0xadc1de,
+            cloudShadowColor: 0x183550,
+            sunColor: 0xff9919,
+            sunGlareColor: 0xff6633,
+            sunlightColor: 0xff9933,
+            speed: 1
+        });
+
+        // ================================
+        // SCROLL REVEAL ANIMATION
+        // ================================
         const observerOptions = {
-            threshold: 0.2, // Trigger when 20% of the element is visible
+            threshold: 0.2,
             rootMargin: '0px 0px -100px 0px'
         };
 
@@ -1017,47 +1230,69 @@
             observer.observe(element);
         });
 
-        // --- 2. Automated Infinite Horizontal Scroll for Services ---
+        // ================================
+        // SPORT SELECTION VIDEO CHANGER
+        // ================================
+        const sportSelect = document.getElementById('sport');
+        const previewVideo = document.getElementById('sport-preview-video');
+        const videoSource = document.getElementById('video-source');
+        const videoCaption = document.getElementById('video-caption');
+
+        const sportVideos = {
+            'boxing': {
+                video: 'preset/boxing.mp4',
+                caption: 'Boxing'
+            },
+            'kickboxing': {
+                video: 'preset/kb.mp4',
+                caption: 'Kickboxing'
+            },
+            'wushu': {
+                video: 'preset/wushu.mp4',
+                caption: 'Wushu'
+            }
+        };
+
+        sportSelect.addEventListener('change', function() {
+            const selectedSport = this.value;
+            if (selectedSport && sportVideos[selectedSport]) {
+                videoSource.src = sportVideos[selectedSport].video;
+                videoCaption.innerHTML = `<i class="fas fa-video"></i> ${sportVideos[selectedSport].caption}`;
+                previewVideo.load();
+                previewVideo.play();
+            }
+        });
+
+        // ================================
+        // SERVICES INFINITE SCROLL
+        // ================================
         const servicesGrid = document.getElementById('services-scroll');
-        
-        // Clone the content to enable seamless looping
         servicesGrid.innerHTML += servicesGrid.innerHTML;
 
-        let scrollSpeed = 0.5; // Pixels per frame (adjust for speed)
+        let scrollSpeed = 0.5;
         let animationFrameId;
 
         function autoScroll() {
-            // Check if the user is hovering over the element (using pointer fine)
             if (servicesGrid.matches(':hover')) {
-                // Do nothing if hovered (pause effect)
+                // Pause on hover
             } else {
-                // Increment scroll position
                 servicesGrid.scrollLeft += scrollSpeed;
-
-                // Check if the scroll has passed the original (first half) content
-                // If it has, reset the scroll position to the start of the cloned content (second half)
-                // servicesGrid.scrollWidth / 2 gives the width of the original content
                 if (servicesGrid.scrollLeft >= servicesGrid.scrollWidth / 2) {
                     servicesGrid.scrollLeft = 0;
                 }
             }
-
-            // Continue the loop
             animationFrameId = requestAnimationFrame(autoScroll);
         }
 
-        // Only start the scroll when the section is visible
         const servicesObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Start the infinite scroll
                     autoScroll(); 
                 } else {
-                    // Pause the scroll when the section leaves the viewport
                     cancelAnimationFrame(animationFrameId); 
                 }
             });
-        }, { threshold: 0.1 }); // Trigger when 10% of the services section is visible
+        }, { threshold: 0.1 });
 
         servicesObserver.observe(document.getElementById('services'));
         
